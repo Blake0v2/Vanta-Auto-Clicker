@@ -1,5 +1,9 @@
 # Changes
 
+## 1.0.4
+
+- Published a small Settings wording change to verify the complete in-app update flow from 1.0.3.
+
 ## 1.0.3
 
 - Added a user-triggered GitHub Release updater in Settings.

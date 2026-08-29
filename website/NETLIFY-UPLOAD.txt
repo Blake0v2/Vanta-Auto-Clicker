@@ -1,0 +1,23 @@
+VANTA WEBSITE — NETLIFY UPLOAD
+
+The website has a spacious layout, real app previews, and your original Vanta app logo.
+
+1. Sign in at https://app.netlify.com.
+2. Open https://app.netlify.com/drop.
+3. Drag Vanta-Website-Netlify.zip onto the page.
+   Or extract the ZIP and drag the folder containing index.html.
+4. Follow the publishing prompt in Netlify.
+
+The ZIP is ready to upload. It does not contain the Windows app itself;
+the Download button follows the latest GitHub Release containing the Setup EXE.
+
+This package is not published automatically. No Netlify account is
+connected in this workspace.
+
+If using Git instead, use:
+  Base directory: website (only when inside the main app repository)
+  Build command: npm run build
+  Publish directory: dist
+
+Official Netlify guide:
+https://docs.netlify.com/start/quickstarts/netlify-drop-quickstart/

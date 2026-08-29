@@ -79,10 +79,10 @@ Source layout:
 
 - `dist/Vanta Auto Clicker.exe` — standalone executable.
 - `dist/Vanta.Auto.Clicker.Setup.exe` — recommended installer with Start menu shortcuts and uninstall support.
-- `dist/Vanta-Auto-Clicker-1.0.3-win.zip` — executable, user guide, and font license.
+- `dist/Vanta-Auto-Clicker-1.0.4-win.zip` — executable, user guide, and font license.
 - `dist/SHA256SUMS.txt` — hashes of the installer, portable executable, and ZIP.
 
-Creating a tag matching the app version, such as `v1.0.3`, builds the app and installer, runs unit tests, checks that the website previews match the app source, and attaches the Setup EXE, portable EXE, ZIP, and checksums to that GitHub Release. You can also upload those files manually to a release or a web host you control. The website download button should point to the Setup EXE for the normal installed experience.
+Creating a tag matching the app version, such as `v1.0.4`, builds the app and installer, runs unit tests, checks that the website previews match the app source, and attaches the Setup EXE, portable EXE, ZIP, and checksums to that GitHub Release. You can also upload those files manually to a release or a web host you control. The website download button should point to the Setup EXE for the normal installed experience.
 
 Installed builds have a manual **Check for updates** button in Settings. It reads the latest non-prerelease GitHub Release, downloads the exact `Vanta.Auto.Clicker.Setup.exe` asset only after confirmation, verifies its GitHub SHA-256 digest (or the matching entry in `SHA256SUMS.txt`) and Windows file metadata, then installs it and reopens Vanta. The release must contain both the Setup EXE and a checksum source; Vanta never installs an unverified update.
 
