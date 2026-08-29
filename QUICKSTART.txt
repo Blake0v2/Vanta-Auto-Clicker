@@ -1,0 +1,87 @@
+VANTA AUTO CLICKER 1.0.3
+Windows 10 / 11
+
+GET STARTED
+1. Recommended: run "Vanta.Auto.Clicker.Setup.exe" once. It installs Vanta
+   for your Windows account, adds Start menu and desktop shortcuts, and makes
+   Vanta appear under Windows Installed apps. Administrator access is not needed.
+   For portable use, extract the ZIP and open "Vanta Auto Clicker.exe" instead.
+2. Choose a click rate and mouse button. Start with 10 clicks per second.
+3. Move the cursor over the place you want to click.
+4. Press F8 to start. Press F8 again to stop.
+5. Press Esc to stop an active run at any time.
+
+You can also press "Start clicking". This gives you 2 seconds to move
+the cursor to the target. Clicking stops if the cursor is over Vanta.
+
+TRY IT FIRST
+Open "Test pad" in Vanta, move your cursor inside the outlined area, then use
+F8. The pad counts real clicks. Closing the test pad stops the run.
+
+YOUR HOTKEY
+Click the F8 field, then press a new shortcut. Esc cancels capture.
+F6 and Esc are reserved. Function keys are recommended: holding Ctrl,
+Alt, Shift, or Win can also change how the target app handles clicks.
+In Hold mode, clicking continues only while you hold the shortcut.
+The Start button is unavailable in Hold mode; use your shortcut.
+
+ADVANCED VIEW
+- Rate: cycles per millisecond, second, minute, or hour.
+- Delay: time between the start of each cycle.
+- Mouse button: left, middle, or right.
+- Click duration: how much of the cycle the button is held down (0-100%).
+- Limits: stop after an exact number of clicks or elapsed seconds.
+- Speed variation: randomize each cycle interval by up to +/-90%.
+- Double click: two clicks per cycle, with a configurable gap.
+  The gap is between release of the first click and press of the second.
+  A gap longer than the cadence extends that cycle. The target app and
+  Windows decide whether a pair is treated as a double click.
+- Sequence clicking: click saved positions in order, then repeat.
+  In Advanced view, move the cursor outside Vanta and press F6 to save
+  a point, or use the 3-second capture button. Reorder or remove points
+  with the buttons under the list. Enable the sequence switch to run it.
+  Both clicks in a double click happen at the same sequence point.
+
+SETTINGS
+Valid settings save automatically in:
+  %APPDATA%\Vanta Auto Clicker\settings.xml
+A previous version is kept as settings.xml.bak.
+Export/import XML profiles from Settings to move your setup between PCs.
+Screen coordinates may need recapturing on a different monitor layout.
+The pin keeps Vanta above other windows. Minimize-on-start is optional.
+Paytone One is bundled; you do not need to install the font. Its license
+is available from "Font license" in Settings and in the ZIP.
+View transitions follow the Windows animation preference.
+Use "Check for updates" in Settings when you want Vanta to check the latest
+GitHub Release. Vanta asks before downloading, verifies the Setup file's
+SHA-256 checksum and version, installs it, then reopens the app. Updates are
+never downloaded or installed automatically in the background.
+
+SAFETY AND COMPATIBILITY
+- Vanta never starts clicking automatically when opened.
+- Esc, closing Vanta, locking Windows, or suspending the PC stops a run.
+- Timing is approximate and depends on Windows, hardware, and the target.
+- Up to 1,000 cycles/sec is configurable; this is not a guaranteed rate.
+- Elevated apps, protected games, and some other targets may reject input.
+  This app does not bypass protection or anti-cheat systems.
+- Use only where automation is permitted.
+- No internet connection, account, Python, or Node.js is needed.
+- Requires .NET Framework 4.8 or newer, normally present on current
+  Windows 10 / 11 installations. This is not a macOS or Linux app.
+
+ABOUT DOWNLOAD WARNINGS
+This release is unsigned. Windows or your browser may show an unknown
+publisher/reputation warning. Only run a copy from a source you trust.
+Do not disable antivirus or other security protections.
+
+SHARING
+Share the Setup EXE for a normal Windows installation. The standalone EXE and
+ZIP remain available for portable use. You can upload these files to a website
+or a GitHub Release. SHA256SUMS.txt can verify the downloads. The source project
+contains build, test, installer, and release scripts.
+
+UNINSTALL
+For an installed copy, open Windows Settings > Apps > Installed apps, find
+Vanta Auto Clicker, and choose Uninstall. The uninstaller lets you keep or
+remove your saved settings. For a portable copy, close Vanta and delete the
+EXE/folder. No service, startup entry, or scheduled task is installed.
