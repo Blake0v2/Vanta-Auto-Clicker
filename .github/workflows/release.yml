@@ -36,5 +36,7 @@ jobs:
           $releaseVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo((Join-Path $PWD 'dist\Vanta Auto Clicker.exe')).ProductVersion
           $expected = 'v' + (($releaseVersion -split '\.')[0..2] -join '.')
           if ($env:RELEASE_TAG -ne $expected) { throw "Tag must match app version: $expected" }
-          gh release create $env:RELEASE_TAG @files --title "Vanta Auto Clicker $env:RELEASE_TAG" --notes-file QUICKSTART.txt --verify-tag
+          $notes = Join-Path 'releases' ($env:RELEASE_TAG + '.md')
+          if (-not (Test-Path -LiteralPath $notes)) { $notes = 'QUICKSTART.txt' }
+          gh release create $env:RELEASE_TAG @files --title "Vanta Auto Clicker $env:RELEASE_TAG" --notes-file $notes --verify-tag
           if ($LASTEXITCODE -ne 0) { throw 'GitHub release creation failed.' }

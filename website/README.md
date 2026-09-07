@@ -30,5 +30,5 @@ For a Netlify Git build, the URL environment variable supplies the absolute shar
 - index.html contains title, description, favicon, and no-JavaScript download fallback.
 - vite.config.ts adds sharing metadata using only trusted build settings.
 - public/images/vanta-logo.png is byte-for-byte identical to the user's original app logo. The favicon and sharing metadata point to this exact file. No generated replacement logo is used.
-- Screenshots show desktop build 1.0.4. The download button uses GitHub's permanent latest-release URL, so it follows future stable releases that contain `Vanta.Auto.Clicker.Setup.exe`.
+- Screenshots show desktop build 1.0.6. The download button uses GitHub's permanent latest-release URL, so it follows future stable releases that contain `Vanta.Auto.Clicker.Setup.exe`.
 - public/fonts contains the original Paytone One font and its SIL Open Font License.

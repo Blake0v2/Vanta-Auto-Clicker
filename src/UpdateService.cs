@@ -1,3 +1,4 @@
+#if !STORE_DISTRIBUTION
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -312,3 +313,4 @@ namespace Vanta
         }
     }
 }
+#endif

@@ -4,6 +4,8 @@ A native Windows desktop autoclicker with pure black main surfaces, neutral text
 
 ## Run
 
+**Free Microsoft Store distribution is being prepared.** See [the Store packaging guide](store/README.md) for the account setup, MSIX build, and remaining certification steps. A separate Store build delegates updates to Microsoft Store. Local preview packages and the existing direct downloads are still unsigned; this preparation does not yet remove Smart App Control blocks for public users.
+
 For a normal Windows installation, run **`dist/Vanta.Auto.Clicker.Setup.exe`** once. It installs for the current user without administrator access, adds Start menu and optional desktop shortcuts, and registers Vanta under Windows **Installed apps** with its own uninstaller. The installed files live in `%LOCALAPPDATA%\Programs\Vanta Auto Clicker`.
 
 For portable use, open **`dist/Vanta Auto Clicker.exe`**, or extract the versioned ZIP from `dist`. Both versions require Windows 10 / 11 and .NET Framework 4.8 or newer. Python, Node.js, and a .NET SDK are not required. Tested locally on Windows 11; Windows 10 and additional hardware / display configurations have not been independently tested.
@@ -79,10 +81,10 @@ Source layout:
 
 - `dist/Vanta Auto Clicker.exe` — standalone executable.
 - `dist/Vanta.Auto.Clicker.Setup.exe` — recommended installer with Start menu shortcuts and uninstall support.
-- `dist/Vanta-Auto-Clicker-1.0.4-win.zip` — executable, user guide, and font license.
+- `dist/Vanta-Auto-Clicker-1.0.6-win.zip` — executable, user guide, and font license.
 - `dist/SHA256SUMS.txt` — hashes of the installer, portable executable, and ZIP.
 
-Creating a tag matching the app version, such as `v1.0.4`, builds the app and installer, runs unit tests, checks that the website previews match the app source, and attaches the Setup EXE, portable EXE, ZIP, and checksums to that GitHub Release. You can also upload those files manually to a release or a web host you control. The website download button should point to the Setup EXE for the normal installed experience.
+Creating a tag matching the app version, such as `v1.0.6`, builds the app and installer, runs unit tests, checks that the website previews match the app source, and attaches the Setup EXE, portable EXE, ZIP, and checksums to that GitHub Release. You can also upload those files manually to a release or a web host you control. The website download button should point to the Setup EXE for the normal installed experience.
 
 Installed builds have a manual **Check for updates** button in Settings. It reads the latest non-prerelease GitHub Release, downloads the exact `Vanta.Auto.Clicker.Setup.exe` asset only after confirmation, verifies its GitHub SHA-256 digest (or the matching entry in `SHA256SUMS.txt`) and Windows file metadata, then installs it and reopens Vanta. The release must contain both the Setup EXE and a checksum source; Vanta never installs an unverified update.
 

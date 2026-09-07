@@ -1,10 +1,13 @@
-param([switch]$SkipBuild)
+param([switch]$SkipBuild, [string]$ExecutablePath)
 $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $PSScriptRoot
 . (Join-Path $PSScriptRoot 'Website-ImageState.ps1')
 
-if (-not $SkipBuild) { & (Join-Path $root 'build.ps1') }
-& (Join-Path $PSScriptRoot 'Inspect-UI.ps1') -ExecutablePath (Join-Path $root 'dist\Vanta Auto Clicker.exe')
+if (-not $ExecutablePath) { $ExecutablePath = Join-Path $root 'dist\Vanta Auto Clicker.exe' }
+$ExecutablePath = [System.IO.Path]::GetFullPath($ExecutablePath)
+if ([System.IO.Path]::GetFileName($ExecutablePath) -ne 'Vanta Auto Clicker.exe') { throw 'ExecutablePath must name Vanta Auto Clicker.exe.' }
+if (-not $SkipBuild) { & (Join-Path $root 'build.ps1') -OutputDirectory (Split-Path -Parent $ExecutablePath) }
+& (Join-Path $PSScriptRoot 'Inspect-UI.ps1') -ExecutablePath $ExecutablePath
 
 $images = Join-Path $root 'website\public\images'
 New-Item -ItemType Directory -Force -Path $images | Out-Null

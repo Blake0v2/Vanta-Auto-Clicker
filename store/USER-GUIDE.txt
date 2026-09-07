@@ -1,0 +1,32 @@
+VANTA AUTO CLICKER - MICROSOFT STORE EDITION
+
+Open Vanta from Start. The app starts idle.
+Choose a click rate and mouse button, point at your target, and press F8.
+F8 toggles clicking; Esc stops an active run.
+The Start clicking button gives you two seconds to position the cursor.
+Use the built-in Test pad to try clicking in an owned test window.
+
+Advanced view adds click/time limits, double clicks, and ordered cursor
+sequences. F6 captures a cursor position. Both views share settings.
+Custom shortcuts, toggle/hold activation, timing variation, and press
+duration are available. Settings supports profile import/export.
+
+UPDATES AND UNINSTALL
+Microsoft Store manages updates for this edition. Open Microsoft Store
+from Settings in Vanta, then check the Store's Downloads/Updates page.
+This edition does not download or run the GitHub Setup installer.
+Uninstall through Windows Settings > Apps > Installed apps.
+
+COMPATIBILITY
+This package targets x64 PCs running Windows 10 version 2004 or later,
+or Windows 11, with .NET Framework 4.8 or newer.
+Input runs with normal user permissions. Elevated or protected targets
+may reject synthetic clicks. Timing depends on Windows and the target.
+Use only where automation is permitted. No protection bypass is provided.
+
+PRIVACY
+Vanta saves preferences and cursor coordinates locally. Export/import
+lets you choose profile files. A global keyboard hook handles shortcuts;
+it does not record or transmit keystrokes. No account, ads, or telemetry
+is included. Store downloads and updates are handled by Microsoft.
+The bundled Paytone One font license is available in Settings.

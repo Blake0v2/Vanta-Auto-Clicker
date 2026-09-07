@@ -118,6 +118,7 @@ $backdrop = [System.Windows.Window]::new()
 $backdrop.WindowStyle = [System.Windows.WindowStyle]::None
 $backdrop.ResizeMode = [System.Windows.ResizeMode]::NoResize
 $backdrop.ShowInTaskbar = $false
+$backdrop.ShowActivated = $false
 $backdrop.Topmost = $true
 $backdrop.Background = [System.Windows.Media.BrushConverter]::new().ConvertFromString('#262626')
 $oldDpi = [VantaUiInspection]::SetThreadDpiAwarenessContext([IntPtr](-4))

@@ -19,8 +19,13 @@ using Microsoft.Win32;
 [assembly: AssemblyDescription("Precision mouse automation with global hotkeys and cursor sequences")]
 [assembly: AssemblyProduct("Vanta Auto Clicker")]
 [assembly: AssemblyCompany("Vanta")]
-[assembly: AssemblyVersion("1.0.4.0")]
-[assembly: AssemblyFileVersion("1.0.4.0")]
+[assembly: AssemblyVersion("1.0.6.0")]
+[assembly: AssemblyFileVersion("1.0.6.0")]
+#if STORE_DISTRIBUTION
+[assembly: AssemblyMetadata("DistributionChannel", "MicrosoftStore")]
+#else
+[assembly: AssemblyMetadata("DistributionChannel", "Direct")]
+#endif
 [assembly: System.Runtime.Versioning.TargetFramework(".NETFramework,Version=v4.8", FrameworkDisplayName = ".NET Framework 4.8")]
 
 namespace Vanta
@@ -79,7 +84,10 @@ namespace Vanta
         private DateTime startingUntil;
         private int captureSeconds;
         private volatile bool holdMode;
-        private bool disposed, closing, changingView, updateInProgress;
+        private bool disposed, closing, changingView;
+#if !STORE_DISTRIBUTION
+        private bool updateInProgress;
+#endif
         private int viewRevision;
         private TestPad testPad;
 
@@ -172,6 +180,10 @@ namespace Vanta
             Find<Button>("ImportButton").Click += (s, e) => ImportProfile();
             Find<Button>("FontLicenseButton").Click += (s, e) => ShowFontLicense();
             Find<Button>("UpdateButton").Click += CheckForUpdates;
+#if STORE_DISTRIBUTION
+            Find<Button>("UpdateButton").Content = "Open Microsoft Store";
+            Find<TextBlock>("UpdateStatus").Text = "Microsoft Store manages updates for this version.";
+#endif
             Find<Button>("ResetButton").Click += (s, e) =>
             {
                 WithHotkeysSuspended(() =>
@@ -187,6 +199,24 @@ namespace Vanta
             };
         }
 
+#if STORE_DISTRIBUTION
+        private void CheckForUpdates(object sender, RoutedEventArgs e)
+        {
+            if (closing) return;
+            try
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = "ms-windows-store://downloadsandupdates",
+                    UseShellExecute = true
+                });
+            }
+            catch (Exception ex)
+            {
+                Notice("Open Microsoft Store from Start to check for updates. " + ex.GetBaseException().Message, true);
+            }
+        }
+#else
         private async void CheckForUpdates(object sender, RoutedEventArgs e)
         {
             if (updateInProgress || closing) return;
@@ -251,6 +281,7 @@ namespace Vanta
         {
             return version.Major + "." + version.Minor + "." + Math.Max(0, version.Build);
         }
+#endif
 
         public void SetView(int index)
         {

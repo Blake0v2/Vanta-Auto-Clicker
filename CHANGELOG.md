@@ -1,5 +1,11 @@
 # Changes
 
+## 1.0.6
+
+- Replaced the logo across the desktop app, installer, Windows icons, website assets, and app previews.
+- Added a separate Microsoft Store build and MSIX packaging workflow. Store builds delegate updates to Microsoft Store and omit the GitHub installer updater; Store publication and certification are still pending.
+- Improved preview capture so its backdrop does not steal focus from Vanta.
+
 ## 1.0.4
 
 - Published a small Settings wording change to verify the complete in-app update flow from 1.0.3.

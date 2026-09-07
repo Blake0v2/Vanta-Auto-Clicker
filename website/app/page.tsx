@@ -12,7 +12,7 @@ import {
 const DOWNLOAD_URL =
   'https://github.com/Blake0v2/Vanta-Auto-Clicker/releases/latest/download/Vanta.Auto.Clicker.Setup.exe';
 const REPOSITORY_URL = 'https://github.com/Blake0v2/Vanta-Auto-Clicker';
-const APP_PREVIEW_VERSION = '1.0.4';
+const APP_PREVIEW_VERSION = '1.0.6';
 
 type AppPreviewProps = {
   view: 'Default' | 'Advanced';

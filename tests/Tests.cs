@@ -83,6 +83,7 @@ namespace Vanta
             Test("Settings round trip atomically, keeping a backup", () => { string path = Path.Combine(artifacts, "roundtrip.xml"); var s = Limited(73); s.SequenceEnabled = true; s.Points.Add(new SequencePoint(-40, 50)); s.HotkeyMods = HotkeyModifiers.Alt; s.HotkeyKey = 0x51; SettingsStore.Save(path, s); s.Amount = 45; SettingsStore.Save(path, s); string warning; var loaded = SettingsStore.Load(path, out warning); Check(warning == null && loaded.Amount == 45 && loaded.Points[0].X == -40 && loaded.HotkeyKey == 0x51 && loaded.HotkeyMods == HotkeyModifiers.Alt && File.Exists(path + ".bak"), "Round trip mismatch"); });
             Test("Corrupt or hostile settings are not executed", () => { string path = Path.Combine(artifacts, "invalid.xml"); File.WriteAllText(path, "<!DOCTYPE x [<!ENTITY xxe SYSTEM 'file:///not-read'>]><ClickSettings>&xxe;</ClickSettings>"); string warning; var s = SettingsStore.Load(path, out warning); Check(warning != null && s.HotkeyKey == 0x77, "DTD not rejected"); });
             Test("View model numeric validation rejects invalid text", () => { var model = new ViewModel(new ClickSettings()); ClickSettings s; string error; model.AmountText = "NaN"; Check(!model.TryRead(true, out s, out error), "Accepted NaN"); model.AmountText = "25"; Check(model.TryRead(true, out s, out error) && s.Amount == 25, "Valid amount rejected"); });
+#if !STORE_DISTRIBUTION
             Test("Updater accepts current and legacy GitHub version tags", () =>
             {
                 Version version;
@@ -107,6 +108,16 @@ namespace Vanta
                 Check(UpdateService.ParseChecksum(contents, "Vanta.AutoClicker.exe") == null, "Checksum from another asset accepted");
                 Check(UpdateService.ParseChecksum("not-a-hash  Vanta.Auto.Clicker.Setup.exe", "Vanta.Auto.Clicker.Setup.exe") == null, "Malformed checksum accepted");
             });
+#else
+            Test("Store build excludes the GitHub downloader and installer update service", () =>
+            {
+                var assembly = typeof(Program).Assembly;
+                Check(assembly.GetType("Vanta.UpdateService") == null, "External updater included in Store build");
+                Check(assembly.GetCustomAttributes(typeof(System.Reflection.AssemblyMetadataAttribute), false)
+                    .Cast<System.Reflection.AssemblyMetadataAttribute>()
+                    .Any(a => a.Key == "DistributionChannel" && a.Value == "MicrosoftStore"), "Store channel missing");
+            });
+#endif
             Test("Native INPUT structure has correct platform size", () => Check(Marshal.SizeOf(typeof(NativeMethods.INPUT)) == (IntPtr.Size == 8 ? 40 : 28), "INPUT packing wrong"));
         }
 
@@ -208,6 +219,15 @@ namespace Vanta
                     Check(main.Window.Icon != null && !main.Engine.IsRunning, "Icon or idle state missing");
                 });
                 if (main == null) return;
+                Test("Update control matches the distribution channel", () =>
+                {
+#if STORE_DISTRIBUTION
+                    Check((string)main.Find<Button>("UpdateButton").Content == "Open Microsoft Store", "Wrong Store update action");
+                    Check(main.Find<TextBlock>("UpdateStatus").Text.Contains("Microsoft Store"), "Store update explanation missing");
+#else
+                    Check((string)main.Find<Button>("UpdateButton").Content == "Check for updates", "Direct updater changed");
+#endif
+                });
                 Test("Embedded Paytone One renders text while window icons retain their glyphs", () =>
                 {
                     GlyphTypeface glyphs;

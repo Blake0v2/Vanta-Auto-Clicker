@@ -1,4 +1,4 @@
-param([switch]$Test, [switch]$UiTest, [switch]$CompileTests, [string]$OutputDirectory)
+param([switch]$Test, [switch]$UiTest, [switch]$CompileTests, [string]$OutputDirectory, [switch]$Store)
 $ErrorActionPreference = 'Stop'
 $root = $PSScriptRoot
 $framework = Join-Path $env:WINDIR 'Microsoft.NET\Framework64\v4.0.30319'
@@ -8,7 +8,7 @@ if (-not (Test-Path -LiteralPath (Join-Path $framework 'csc.exe'))) {
 $compiler = Join-Path $framework 'csc.exe'
 if (-not (Test-Path -LiteralPath $compiler)) { throw 'The .NET Framework 4.8 compiler is required. Install .NET Framework 4.8 on Windows.' }
 $build = Join-Path $root 'build'
-$dist = if ($OutputDirectory) { [System.IO.Path]::GetFullPath($OutputDirectory) } else { Join-Path $root 'dist' }
+$dist = if ($OutputDirectory) { [System.IO.Path]::GetFullPath($OutputDirectory) } elseif ($Store) { Join-Path $build 'store-app' } else { Join-Path $root 'dist' }
 New-Item -ItemType Directory -Force -Path $build,$dist | Out-Null
 # WPF fonts must be in the assembly's .g.resources collection, not an ordinary
 # embedded-resource entry. Store the original font as a stream without changes.
@@ -23,6 +23,7 @@ $sources = @(Get-ChildItem -LiteralPath (Join-Path $root 'src') -Filter '*.cs' |
 $references = @('System.dll','System.Core.dll','System.Xml.dll','System.Xaml.dll','System.Runtime.Serialization.dll')
 $references += @('WindowsBase.dll','PresentationCore.dll','PresentationFramework.dll' | ForEach-Object { Join-Path $framework "WPF\$_" })
 $common = @('/nologo','/optimize+','/warn:4','/platform:anycpu','/utf8output')
+if ($Store) { $common += '/define:STORE_DISTRIBUTION' }
 $common += @($references | ForEach-Object { "/reference:$_" })
 $common += "/resource:$(Join-Path $root 'src\MainWindow.xaml'),Vanta.MainWindow.xaml"
 $common += "/resource:$(Join-Path $root 'src\Theme.xaml'),Vanta.Theme.xaml"
@@ -33,8 +34,9 @@ $exe = Join-Path $dist 'Vanta Auto Clicker.exe'
 if ($LASTEXITCODE -ne 0) { throw 'Application build failed.' }
 Write-Output "Built: $exe"
 if ($Test -or $UiTest -or $CompileTests) {
-    $testExe = Join-Path $build 'Vanta.Tests.exe'
-    & $compiler @common '/target:exe' '/main:Vanta.Tests' "/out:$testExe" "/resource:$fontResources,Vanta.Tests.g.resources" "/win32manifest:$(Join-Path $root 'src\app.manifest')" @sources (Join-Path $root 'tests\Tests.cs')
+    $testExe = Join-Path $build $(if ($Store) { 'Vanta.Store.Tests.exe' } else { 'Vanta.Tests.exe' })
+    $testResourceName = [System.IO.Path]::GetFileNameWithoutExtension($testExe) + '.g.resources'
+    & $compiler @common '/target:exe' '/main:Vanta.Tests' "/out:$testExe" "/resource:$fontResources,$testResourceName" "/win32manifest:$(Join-Path $root 'src\app.manifest')" @sources (Join-Path $root 'tests\Tests.cs')
     if ($LASTEXITCODE -ne 0) { throw 'Test build failed.' }
     if ($Test) { & $testExe; if ($LASTEXITCODE -ne 0) { throw 'Tests failed.' } }
     if ($UiTest) { & $testExe '--ui'; if ($LASTEXITCODE -ne 0) { throw 'UI tests failed.' } }

@@ -12,7 +12,7 @@
           <Image x:Name="BrandLogo" Width="34" Height="34" RenderOptions.BitmapScalingMode="HighQuality"/>
           <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="11,0,0,0"><TextBlock Text="VANTA" FontWeight="Normal" FontSize="18"/><TextBlock Text="AUTO CLICKER" Foreground="#929292" FontSize="9" Margin="0,2,0,0"/></StackPanel>
           <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
-            <Border Background="#1A1A1A" CornerRadius="9" BorderBrush="#282828" BorderThickness="1.5" Padding="8,4" Margin="0,0,18,0"><TextBlock Text="v1.0.4" FontSize="10" Foreground="#C8C8C8"/></Border>
+            <Border Background="#1A1A1A" CornerRadius="9" BorderBrush="#282828" BorderThickness="1.5" Padding="8,4" Margin="0,0,18,0"><TextBlock Text="v1.0.6" FontSize="10" Foreground="#C8C8C8"/></Border>
             <Button x:Name="PinButton" Style="{StaticResource Chrome}" Content="&#xE718;" FontFamily="Segoe MDL2 Assets" ToolTip="Keep Vanta on top" AutomationProperties.Name="Always on top"/>
             <Button x:Name="MinimizeButton" Style="{StaticResource Chrome}" Content="&#xE921;" FontFamily="Segoe MDL2 Assets" ToolTip="Minimize" AutomationProperties.Name="Minimize"/>
             <Button x:Name="CloseButton" Style="{StaticResource Chrome}" Content="&#xE8BB;" FontFamily="Segoe MDL2 Assets" ToolTip="Close and stop clicking" AutomationProperties.Name="Close"/>
@@ -112,7 +112,7 @@
               <StackPanel Margin="0,0,18,0"><TextBlock Text="Updates" FontWeight="Normal" Margin="0,0,0,7"/><TextBlock x:Name="UpdateStatus" Text="Updates are checked only when you ask." Foreground="#8E8E8E" FontSize="12" TextWrapping="Wrap"/></StackPanel>
               <Button x:Name="UpdateButton" Grid.Column="1" Content="Check for updates" Background="#000000" BorderBrush="{StaticResource AccentOutline}" VerticalAlignment="Center"/>
             </Grid></Border>
-            <TextBlock Text="Vanta Auto Clicker 1.0.4  ·  Windows 10 / 11  ·  No ads. No telemetry.&#x0a;Timing depends on Windows and the target app. Use only where automation is allowed." TextWrapping="Wrap" Foreground="#717171" FontSize="11" Margin="2,18,0,6" LineHeight="19"/>
+            <TextBlock Text="Vanta Auto Clicker 1.0.6  ·  Windows 10 / 11  ·  No ads. No telemetry.&#x0a;Timing depends on Windows and the target app. Use only where automation is allowed." TextWrapping="Wrap" Foreground="#717171" FontSize="11" Margin="2,18,0,6" LineHeight="19"/>
           </StackPanel>
         </Grid>
       </ScrollViewer>
